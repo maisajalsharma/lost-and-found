@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost and Found City</title>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Background container */
+.background-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 150%;
+  min-width: 100%;
+  transform: translate(-50%, -50%);
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+  z-index: 1;
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 2vw;
+  height: 2vw;
+  z-index: 3;
+}
+
+.sparkle::before, .sparkle::after {
+  content: '';
+  position: absolute;
+  background: white;
+}
+
+.sparkle::before { width: 100%; height: 15%; top: 50%; left: 0; transform: translateY(-50%); }
+.sparkle::after { width: 15%; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
+
+@keyframes twinkle {
+  0%,100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Content (text + button) */
+.content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  width: 90%;
+  max-width: 1200px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main text */
+.main-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Text lines */
+.text-line {
+  display: block;
+  line-height: 1.1;
+  text-transform: uppercase;
+
+  /* FIX: Make sure text stays on ONE LINE */
+  white-space: nowrap;
+
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Individual characters animation */
+.char {
+  display: inline-block;
+  opacity: 0;
+  animation: letter-bob 1.5s ease-in-out infinite;
+}
+
+@keyframes letter-bob {
+  0%,100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-0.5rem); }
+}
+
+.text-line .char {
+  animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+/* Text line styles */
+.text-line-1 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(3rem, 10vw, 8rem);
+  letter-spacing: 0.05em;
+  color: #FFEC00;
+  text-shadow:
+    -0.5vw -0.5vw 0 #007bff,
+     0.5vw -0.5vw 0 #007bff,
+    -0.5vw 0.5vw 0 #007bff,
+     0.5vw 0.5vw 0 #007bff,
+    0 0 1vw rgba(255,236,0,0.5),
+    0 1vw 1.5vw rgba(0,0,0,0.3);
+}
+
+.text-line-2 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(2rem, 7vw, 5rem);
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+  color: #007bff;
+  text-shadow:
+    -0.4vw -0.4vw 0 #FFEC00,
+     0.4vw -0.4vw 0 #FFEC00,
+    -0.4vw 0.4vw 0 #FFEC00,
+     0.4vw 0.4vw 0 #FFEC00,
+    0 0 0.7vw rgba(0, 123, 255, 0.5),
+    0 0.7vw 1vw rgba(0,0,0,0.3);
+}
+
+/* Button */
+.button-container {
+  margin-top: 2rem;
+}
+
+.welcome-btn {
+  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 4vw, 3rem);
+  font-size: clamp(1rem, 3vw, 2rem);
+  font-family: 'Luckiest Guy', cursive;
+  background: #FFEC00;
+  color: #007bff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.welcome-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.4);
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 1024px) {
+  .text-line-1 { font-size: clamp(2.5rem, 12vw, 6rem); }
+  .text-line-2 { font-size: clamp(1.5rem, 8vw, 4rem); margin-top: 0.5rem; }
+}
+
+/* @media (max-width: 768px) {
+  .text-line-1 { font-size: clamp(2rem, 15vw, 5rem); }
+  .text-line-2 { font-size: clamp(1.2rem, 10vw, 3.5rem); margin-top: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .text-line-1 { font-size: clamp(1.5rem, 20vw, 4rem); }
+  .text-line-2 { font-size: clamp(1rem, 12vw, 3rem); margin-top: 0.8rem; }
+} */
+ @media (max-width: 480px) {
+  .main-text {
+    transform: scale(0.75);      /* shrink entire title */
+    transform-origin: center;    /* shrink from middle */
+  }
+}
+
+@media (max-width: 360px) {
+  .main-text {
+    transform: scale(0.65);      /* smaller for very small phones */
+  }
+}
+
+@media (max-width: 768px) {
+  .text-line-1 { font-size: clamp(1.5rem, 12vw, 3.5rem); }
+  .text-line-2 { font-size: clamp(1.2rem, 10vw, 2.5rem); margin-top: 0.4rem; }
+}
+
+@media (max-width: 480px) {
+  .text-line-1 { font-size: clamp(1.2rem, 14vw, 2.8rem); }
+  .text-line-2 { font-size: clamp(1rem, 12vw, 2.2rem); margin-top: 0.3rem; }
+}
+
+@media (max-width: 360px) {
+  .text-line-1 { font-size: clamp(1rem, 16vw, 2.2rem); }
+  .text-line-2 { font-size: clamp(0.8rem, 14vw, 1.8rem); margin-top: 0.2rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="background-container">
+  <div class="sparkle sparkle-1"></div>
+  <div class="sparkle sparkle-2"></div>
+  <div class="sparkle sparkle-3"></div>
+
+  <div class="content">
+    <div class="main-text">
+      <span class="text-line text-line-1">
+        <span class="char" style="--char-index: 1;">L</span>
+        <span class="char" style="--char-index: 2;">o</span>
+        <span class="char" style="--char-index: 3;">s</span>
+        <span class="char" style="--char-index: 4;">t</span>
+        <span class="char" style="--char-index: 5;"> </span>
+        <span class="char" style="--char-index: 6;">a</span>
+        <span class="char" style="--char-index: 7;">n</span>
+        <span class="char" style="--char-index: 8;">d</span>
+        <span class="char" style="--char-index: 9;"> </span>
+        <span class="char" style="--char-index: 10;">F</span>
+        <span class="char" style="--char-index: 11;">o</span>
+        <span class="char" style="--char-index: 12;">u</span>
+        <span class="char" style="--char-index: 13;">n</span>
+        <span class="char" style="--char-index: 14;">d</span>
+      </span>
+
+      <span class="text-line text-line-2">
+        <span class="char" style="--char-index: 15;">C</span>
+        <span class="char" style="--char-index: 16;">i</span>
+        <span class="char" style="--char-index: 17;">t</span>
+        <span class="char" style="--char-index: 18;">y</span>
+      </span>
+    </div>
+
+    <div class="button-container">
+      <button class="welcome-btn" onclick="window.location.href='index2.html'">Welcome</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

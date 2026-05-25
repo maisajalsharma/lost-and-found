@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Portal | PSIT Campus</title>
+    <meta name="description" content="PSIT's official lost and found platform. Report lost items, claim found belongings, and reunite with your possessions.">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span>Lost<span class="gradient-text">&</span>Found</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#howwork">How It Works</a></li>
+                <li><a href="#items">Items</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-buttons">
+           <button class="btn-ghost" onclick="window.open('loginpage.html', '_blank')">
+             Sign In
+           </button>
+ 
+                <button class="btn-primary" onclick="openModal('reportModal')">Report Item</button>
+                <button class="btn-ghost" onclick="window.location.href='feedback.html'">
+                 Feedback
+                 </button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#items" onclick="closeMobileMenu()">Items</a></li>
+            <li><a href="#team" onclick="closeMobileMenu()">Team</a></li>
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+            <li><button class="btn-ghost" onclick="window.open('loginpage.html', '_blank')">
+            Sign In
+            </button></li>
+                <li><button class="btn-ghost" onclick="window.location.href='feedback.html'">
+                 Feedback
+                 </button></li>
+
+            <li><button class="btn-primary w-full" onclick="openModal('reportModal'); closeMobileMenu();">Report Item</button></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="grid-pattern"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                <span>PSIT Campus Lost & Found Portal</span>
+            </div>
+<!-- 
+            <div class="photo-3d-container">
+                <div class="photo-3d-wrapper">
+                    <div class="photo-3d-card">
+                        <div class="photo-3d-front">
+                            <img src="image.png" alt="PSIT Campus" />
+                            <div class="photo-overlay">
+                                <div class="photo-shine"></div>
+                            </div>
+                        </div>
+                        <div class="photo-3d-glow"></div>
+                    </div>
+                </div> -->
+
+            <h1>Lost Something?<br><span class="gradient-text">We'll Help You Find It</span></h1>
+            
+            <p>The official lost and found platform for PSIT. Report lost items, claim found items, and reunite with your belongings quickly and securely.</p>
+
+            <div class="hero-buttons">
+                <button class="btn-primary btn-lg" onclick="openModal('reportModal')">
+                    <i class="fas fa-upload"></i> Report Lost Item
+                </button>
+                <button class="btn-outline btn-lg" onclick="scrollToSection('items')">
+                    <i class="fas fa-search"></i> Browse Found Items
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">500+</span>
+                    <span class="stat-label">Items Returned</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">1.2K+</span>
+                    <span class="stat-label">Reports Filed</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">95%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">24hr</span>
+                    <span class="stat-label">Avg. Return Time</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="container mt-40 text-center" id="howwork">
+  <h2 class="gradient-text">How It Works</h2>
+  <p class="text-secondary">Follow these simple steps to find your lost items</p>
+  <br><br>
+  <div class="steps-grid mt-20">
+    <!-- Step 1 -->
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <div class="step-icon icon-purple">🔍</div>
+      <h3>Search</h3>
+      <p>Look for your lost item in our database by entering its details.</p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <div class="step-icon icon-blue">📌</div>
+      <h3>Report</h3>
+      <p>If you can’t find it, report the lost item and provide all necessary info.</p>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <div class="step-icon icon-teal">💬</div>
+      <h3>Connect</h3>
+      <p>Our system will notify users and help you connect with the finder.</p>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card">
+      <div class="step-number">4</div>
+      <div class="step-icon icon-amber">✅</div>
+      <h3>Retrieve</h3>
+      <p>Coordinate safely to get your lost item back in your hands.</p>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Items Section -->
+    <section class="section section-dark" id="items">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recent <span class="gradient-text">Items</span></h2>
+                <p>Browse through recently reported lost and found items on campus</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="lost" onclick="switchTab('lost')">
+                    <i class="fas fa-exclamation-circle"></i> Lost Items
+                </button>
+                <button class="tab-btn" data-tab="found" onclick="switchTab('found')">
+                    <i class="fas fa-check-circle"></i> Found Items
+                </button>
+            </div>
+
+            <div class="items-grid" id="itemsGrid">
+                <!-- Items will be loaded by JavaScript -->
+            </div>
+
+            <div class="text-center mt-40">
+                <button class="btn-outline">
+                    View All Items <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="gradient-text">Team</span></h2>
+                <p>Meet the talented individuals behind the PSIT Lost & Found Portal</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="saurabh.jpg" alt="Saurabh Tiwari">
+                    </div>
+                    <h4>Saurabh Tiwari</h4>
+                    <p>Project Leader</p>
+                    <a href="http://www.linkedin.com/in/saurabh-tiwari05" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="samarth.jpg" alt="Samarth Sharma">
+                    </div>
+                    <h4>Samarth Sharma</h4>
+                    <p>Backend Developer</p>
+                    <a href="https://www.linkedin.com/in/samarth-sharma-009ap2005?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="sagar.jpg" alt="Sagar Shukla">
+                    </div>
+                    <h4>Sagar Shukla</h4>
+                    <p>Project Advisor, Strategy & Technical Contributor
+                    </p>
+                    <a href="https://www.linkedin.com/in/sagar-shukla-76a7a5339?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="sajal.jpg" alt="Sajal Sharma">
+                    </div>
+                    <h4>Sajal Sharma</h4>
+                    <p>Frontend Developer & <br>UI/UX Designer</p>
+                    <a href="https://www.linkedin.com/in/sajal-sharma-5b1784376" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="sameer.jpg" alt="Sameer Kumar">
+                    </div>
+                    <h4>Sameer Kumar</h4>
+                    <p>Database Admin</p>
+                    <a href="https://www.linkedin.com/in/sameer-kumar-813779375/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="swatvik.jpg" alt="Satwik Mishra">
+                    </div>
+                    <h4>Satwik Mishra</h4>
+                    <p>QA Engineer</p>
+                    <a href="https://www.linkedin.com/in/satwik-mishra-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-gradient" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In <span class="gradient-text">Touch</span></h2>
+                <p>Have questions or need help? Reach out to us anytime</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="glass-card">
+                        <h3>Contact Information</h3>
+                        <p>Ready to start your search or have questions about the platform? We're here to help you reunite with your belongings.</p>
+
+                        <div class="contact-items">
+                            <a href="mailto:lostfound@psit.ac.in" class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="contact-label">Email</span>
+                                    <span class="contact-value">lostfound@psit.ac.in</span>
+                                </div>
+                            </a>
+
+                            <a href="tel:+917985726824" class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <span class="contact-label">Phone</span>
+                                    <span class="contact-value">+91 7985726824</span>
+                                </div>
+                            </a>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <span class="contact-label">Location</span>
+                                    <span class="contact-value">PSIT, Kanpur, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card hours-card">
+                        <h4>Lost & Found Center Hours</h4>
+                        <div class="hours-list">
+                            <div class="hours-row">
+                                <span>Monday - Friday</span>
+                                <span>9:00 AM - 5:00 PM</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Saturday</span>
+                                <span>10:00 AM - 2:00 PM</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Sunday</span>
+                                <span class="text-red">Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <div class="glass-card">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" placeholder="sajal sharma" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="sajal@psit.ac.in" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Describe your issue or question..." rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>Lost<span class="gradient-text">&</span>Found</span>
+                    </a>
+                    <p>The official lost and found portal for PSIT campus. Helping students and staff reunite with their belongings since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#items">Lost Items</a></li>
+                        <li><a href="#items">Found Items</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Wallets & Purses</a></li>
+                        <li><a href="#">ID & Documents</a></li>
+                        <li><a href="#">Keys</a></li>
+                        <li><a href="#">Bags</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Get notified when items matching your description are found.</p>
+                    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Lost & Found PSIT. Built by Sajal Sharma & Team.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-overlay" onclick="closeModal('reportModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Report an Item</h3>
+                <button class="modal-close" onclick="closeModal('reportModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="report-tabs">
+                    <button class="report-tab active" data-type="lost" onclick="switchReportType('lost')">
+                        <i class="fas fa-exclamation-triangle"></i> I Lost Something
+                    </button>
+                    <button class="report-tab" data-type="found" onclick="switchReportType('found')">
+                        <i class="fas fa-hand-holding"></i> I Found Something
+                    </button>
+                </div>
+
+                <form id="reportForm" onsubmit="handleReportSubmit(event)">
+                    <input type="hidden" id="reportType" value="lost">
+                    
+                    <div class="form-group">
+                        <label>Item Name *</label>
+                        <input type="text" placeholder="e.g., Black Leather Wallet" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select required>
+                                <option value="">Select category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="wallet">Wallet & Purse</option>
+                                <option value="documents">ID & Documents</option>
+                                <option value="keys">Keys</option>
+                                <option value="bags">Bags</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date *</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location *</label>
+                        <input type="text" placeholder="e.g., Library - 2nd Floor" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea placeholder="Provide detailed description of the item..." rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" placeholder="Your full name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Image (Optional)</label>
+                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag and drop</span>
+                            <small>PNG, JPG up to 5MB</small>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full btn-lg">
+                        <i class="fas fa-paper-plane"></i> Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Message sent successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

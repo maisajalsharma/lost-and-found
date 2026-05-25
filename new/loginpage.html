@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login | Lost & Found Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
+
+/* ✨ PAGE FADE-IN ANIMATION */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("college.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    animation: pageFade 0.9s ease-out forwards;
+}
+
+@keyframes pageFade {
+    from { opacity: 0; transform: scale(1.01); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ✨ CONTAINER POP-IN ANIMATION */
+.container{
+    width:900px;
+    max-width:95%;
+    background:white;
+    border-radius:25px;
+    display:flex;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,0.18);
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: containerPop 0.9s ease-out forwards 0.3s;
+}
+
+@keyframes containerPop {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.left{
+    flex:1;
+    background:#5D8BF4;
+    padding:48px;
+    color:white;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-top-right-radius:140px;
+    border-bottom-right-radius:140px;
+}
+.left h1{font-size:2.1rem;font-weight:800;margin-bottom:12px;}
+.left p{opacity:.9;margin-bottom:22px;}
+.left button{
+    padding:12px 25px;
+    background:white;
+    color:#5D8BF4;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* right panel */
+.right{
+    flex:1;
+    padding:56px;
+    min-height:380px;
+}
+h2{font-size:1.9rem;margin-bottom:18px;font-weight:800;color:#111;}
+
+/* buttons */
+.option-btn{
+    width:100%;
+    padding:14px;
+    background:#5D8BF4;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    margin-bottom:14px;
+    cursor:pointer;
+}
+.option-btn:hover{background:#4b77db}
+
+/* student form */
+#studentForm{display:block;} 
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;color:#222;}
+.form-group input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:0.96rem;
+}
+
+/* qr scanner inline */
+#qrScannerSection{display:none;text-align:center;margin-top:12px;}
+#qr-reader{width:100%;max-width:360px;margin:auto;border-radius:12px;overflow:hidden;}
+#successTick{display:none;font-size:3rem;color:#28a745;margin-top:10px;}
+
+/* extra */
+.row{display:flex;gap:12px;align-items:center;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="left">
+    <h1>Hello, Welcome!</h1>
+    <p>Login to your Lost & Found Portal</p>
+  </div>
+
+  <div class="right">
+    <h2>Login</h2>
+
+    <!-- Student form visible by default -->
+    <div id="studentForm">
+      <div class="form-group">
+        <label for="studentId">Student ID / Roll No</label>
+        <input id="studentId" type="text" placeholder="Enter ID"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter Password">
+      </div>
+
+      <div class="row">
+        <label><input id="rememberMe" type="checkbox"> Remember Me</label>
+        <a href="#" style="margin-left:auto;color:#5D8BF4;text-decoration:none;">Forgot Password?</a>
+      </div>
+      <br>
+      <button id="loginBtn" class="option-btn">Login</button>
+      <div style="text-align:center; margin:1px 0; font-weight:600; color:#444;">
+        or
+      </div>
+      <br>
+
+      <!-- QR button -->
+      <button id="btnQR" class="option-btn" onclick="openQR()">
+        Login with QR Code
+      </button>
+
+      <!-- Register section -->
+      <div style="text-align:center; margin-top:15px; color:#444; font-size:0.95rem;">
+          <p style="margin-bottom:8px;">Didn't have an account?</p>
+
+          <button onclick="alert('Register flow')"
+              style="padding:10px 22px;background:#5D8BF4;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+              Register
+          </button>
+      </div>
+
+    </div>
+
+    <!-- QR Scanner -->
+    <div id="qrScannerSection">
+      <h3 style="margin-top:6px;margin-bottom:10px;">Scan your ID QR</h3>
+      <div id="qr-reader"></div>
+      <div id="successTick">✔</div>
+
+      <button id="btnStudent" class="option-btn" style="margin-top:15px;" onclick="openStudent()">
+        Login with Student ID / Roll No
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+let qrScanner = null;
+
+/* STUDENT LOGIN MODE */
+function openStudent(){
+  stopCamera();
+
+  document.getElementById("studentForm").style.display = "block";
+  document.getElementById("qrScannerSection").style.display = "none";
+
+  document.getElementById("btnQR").style.display = "block";
+  document.getElementById("btnStudent").style.display = "none";
+}
+
+/* QR MODE */
+function openQR(){
+  document.getElementById("studentForm").style.display = "none";
+  document.getElementById("qrScannerSection").style.display = "block";
+  document.getElementById("successTick").style.display = "none";
+
+  document.getElementById("btnQR").style.display = "none";
+  document.getElementById("btnStudent").style.display = "block";
+
+  setTimeout(() => startScanner(), 250);
+}
+
+/* START CAMERA */
+async function startScanner(){
+  if(qrScanner){
+    try{ await qrScanner.stop(); }catch(e){}
+    try{ qrScanner.clear(); }catch(e){}
+    qrScanner = null;
+  }
+
+  qrScanner = new Html5Qrcode("qr-reader");
+
+  try{
+    await qrScanner.start(
+      { facingMode:"environment" },
+      { fps:10, qrbox:250 },
+      qrText => {
+        document.getElementById("studentId").value = qrText;
+        document.getElementById("successTick").style.display = "block";
+
+        setTimeout(() => openStudent(), 900);
+        stopCamera();
+      }
+    );
+  }catch(err){
+    alert("Camera error! Use localhost or HTTPS and allow camera.");
+    console.error(err);
+  }
+}
+
+/* STOP CAMERA */
+async function stopCamera(){
+  if(qrScanner){
+    try{ await qrScanner.stop(); }catch(e){}
+    try{ qrScanner.clear(); }catch(e){}
+    qrScanner = null;
+  }
+}
+</script>
+
+</body>
+</html>
